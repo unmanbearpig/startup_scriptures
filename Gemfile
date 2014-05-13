@@ -38,3 +38,16 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+group :development, :test do
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'pry-rails'
+  gem 'pry-plus'
+  gem 'rspec-rails'
+end
+
+gem 'bootstrap-sass'
+gem 'haml'
+gem 'jquery-ui-rails'
+gem 'jquery-turbolinks'
+gem 'devise'
