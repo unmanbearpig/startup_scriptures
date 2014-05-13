@@ -1,0 +1,4 @@
+class Link < ActiveRecord::Base
+  validates :title, presence: true, allow_blank: false
+  validates :url, presence: true, allow_blank: false # TODO: validate url format
+end
