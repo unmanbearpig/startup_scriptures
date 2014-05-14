@@ -1,6 +1,8 @@
 class CategoriesController < ApplicationController
   layout 'with_categories_header'
 
+  before_action :make_sure_admin_signed_in, except: %i(index show)
+
   def index
     render layout: 'with_header'
   end
@@ -10,28 +12,22 @@ class CategoriesController < ApplicationController
   end
 
   def new
-    return unless make_sure_admin_signed_in
     @category = Category.new
     render layout: 'with_header'
   end
 
   def create
-    return unless make_sure_admin_signed_in
-
     @category = Category.create category_params
     redirect_to_resource_if_valid @category
   end
 
   def destroy
-    return unless make_sure_admin_signed_in
   end
 
   def edit
-    return unless make_sure_admin_signed_in
   end
 
   def update
-    return unless make_sure_admin_signed_in
   end
 
   private
