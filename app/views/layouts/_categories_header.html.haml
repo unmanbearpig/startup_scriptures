@@ -7,3 +7,7 @@
     -# </ul>
     %li{class: ('active' if current_category?(category))}
       = link_to category.name, category
+  - if admin_signed_in?
+    %li
+      %a{href: new_category_path}
+        %strong New

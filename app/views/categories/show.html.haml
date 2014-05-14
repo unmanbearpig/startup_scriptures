@@ -1,0 +1,12 @@
+= set_title @category.name
+
+- if admin_signed_in?
+  .admin
+    = link_to 'Edit category', edit_category_path(@category)
+
+- @category.subcategories.each do |subcat|
+  %h3= subcat.name
+  %ul
+    - subcat.links.each do |link|
+      %li
+        = render partial: 'link', locals: {link: link}
