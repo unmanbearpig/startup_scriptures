@@ -29,7 +29,7 @@ class SubcategoriesController < ApplicationController
   private
 
   def set_category
-    @category = Category.find(params[:category_id])
+    @category ||= Category.find(params[:category_id])
   end
 
   def subcategory_params
