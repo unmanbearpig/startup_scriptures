@@ -1,8 +1,6 @@
 class CategoriesController < ApplicationController
   layout 'with_categories_header'
 
-  include AuthHelper
-
   def index
     render layout: 'with_header'
   end
@@ -19,14 +17,9 @@ class CategoriesController < ApplicationController
 
   def create
     return unless make_sure_admin_signed_in
-    category = Category.create(category_params)
 
-    if category.valid?
-      redirect_to category
-    else
-      flash_messages_from_errors(category.errors)
-      redirect_to :back
-    end
+    @category = Category.create category_params
+    redirect_to_resource_if_valid @category
   end
 
   def destroy

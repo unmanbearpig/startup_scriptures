@@ -1,8 +1,16 @@
 = set_title @category.name
 
 - if admin_signed_in?
-  .admin
-    = link_to 'Edit category', edit_category_path(@category)
+  .btn-group
+    %button(type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown")
+      Edit
+      %span.caret
+    %ul.dropdown-menu{role: 'menu'}
+      %li
+        %a{href: edit_category_path(@category)} Edit category
+      %li.divider
+      %li
+        %a{href: new_category_subcategory_path(@category)} New subcategory
 
 - @category.subcategories.each do |subcat|
   %h3= subcat.name

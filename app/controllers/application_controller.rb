@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   helper FlashHelper
 
   include FlashHelper
+  include AuthHelper
 
   protected
 
@@ -18,6 +19,15 @@ class ApplicationController < ActionController::Base
       'devise'
     else
       'application'
+    end
+  end
+
+  def redirect_to_resource_if_valid instance
+    if instance.valid?
+      redirect_to instance
+    else
+      flash_messages_from_errors(instance.errors)
+      redirect_to :back
     end
   end
 end
