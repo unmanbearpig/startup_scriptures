@@ -1,0 +1,7 @@
+- content_for :before_content do
+  = render 'layouts/categories_header'
+
+- content_for :container_content do
+  = yield
+
+= render template: 'layouts/application'
