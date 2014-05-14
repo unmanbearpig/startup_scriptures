@@ -6,10 +6,10 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
-    = flash_messages
-
     - if content_for? :before_content
       = yield :before_content
+
+    = flash_messages
 
     .container
       = yield :container_content
