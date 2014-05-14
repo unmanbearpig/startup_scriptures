@@ -1,0 +1,8 @@
+
+- categories.each do |category|
+  .col-md-3
+    = category.name
+    %ul.links-list
+      - category.links.each do |link|
+        %li
+          = render partial: 'link', locals: {link: link}

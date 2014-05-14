@@ -1,1 +1,9 @@
-= render 'layouts/navbar'
+%ul.nav.nav-tabs
+  - categories.each do |category|
+    -#   <ul class="nav nav-tabs">
+    -#   <li class="active"><a href="#">Home</a></li>
+    -#   <li><a href="#">Profile</a></li>
+    -#   <li><a href="#">Messages</a></li>
+    -# </ul>
+    %li{class: ('active' if current_category?(category))}
+      = link_to category.name, category

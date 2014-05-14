@@ -12,4 +12,5 @@ module ApplicationHelper
       render partial: 'layouts/flash_message', locals: {name: name, flash_class: flash_class, msg: msg}
     end.join(' ').html_safe
   end
+
 end

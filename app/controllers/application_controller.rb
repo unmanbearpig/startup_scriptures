@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
 
   layout :layout_by_resource
 
+  helper :categories
+
   protected
 
   def layout_by_resource
@@ -12,6 +14,19 @@ class ApplicationController < ActionController::Base
       'devise'
     else
       'application'
+    end
+  end
+
+  def admin_signed_in?
+    user_signed_in? && current_user.is_admin
+  end
+
+  # returns true if user is admin, false otherwise
+  def make_sure_admin_signed_in
+    if admin_signed_in?
+      true
+    else
+      authenticate_user!
     end
   end
 end
