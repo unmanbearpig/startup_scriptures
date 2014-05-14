@@ -3,10 +3,6 @@ class SubcategoriesController < ApplicationController
 
   before_action :set_category, only: %i(new create)
 
-  def index
-    @subcategories = Category.find(params[:id]).subcategories
-  end
-
   def new
     return unless make_sure_admin_signed_in
 
