@@ -26,7 +26,17 @@ class ApplicationController < ActionController::Base
     if admin_signed_in?
       true
     else
-      authenticate_user!
+      if user_signed_in?
+        not_permitted!
+      else
+        redirect_to new_user_session_path
+      end
+      false
     end
+  end
+
+  def not_permitted!
+    flash[:alert] = "You don't have access to that page"
+    redirect_to root_path
   end
 end
