@@ -1,0 +1,5 @@
+= link_to category.name, category
+%ul.links-list
+  - category.links.each do |link|
+    %li
+      = render link

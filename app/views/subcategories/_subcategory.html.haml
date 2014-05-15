@@ -1,0 +1,5 @@
+%h3= subcategory.name
+%ul
+  - subcategory.links.each do |link|
+    %li
+      = render link

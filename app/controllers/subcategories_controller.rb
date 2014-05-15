@@ -5,7 +5,7 @@ class SubcategoriesController < ApplicationController
   before_action :make_sure_admin_signed_in
 
   def new
-    @subcategory = Subcategory.new category: @category
+    @subcategory = @category.subcategories.new
   end
 
   def create
