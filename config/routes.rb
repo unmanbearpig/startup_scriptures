@@ -1,14 +1,19 @@
 Rails.application.routes.draw do
+  root 'categories#index'
+
   get 'search' => 'links#search', as: :links_search
 
   devise_for :users
-  root 'categories#index'
 
   resources :categories do
     resources :subcategories, shallow: true do
       resources :links
     end
   end
+
+  get 'reading_list' => 'saved_links#index', as: :reading_list
+  post 'saved_link/:link_id' => 'saved_links#create', as: :save_link
+  delete 'saved_link/:link_id' => 'saved_links#delete', as: :delete_saved_link
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

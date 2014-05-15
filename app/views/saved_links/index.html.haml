@@ -1,0 +1,6 @@
+- if @links.empty?
+  Your reading list is empty
+- else
+  - @links.each do |link|
+    .link.reading-list-item
+      = render link

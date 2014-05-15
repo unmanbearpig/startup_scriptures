@@ -1,3 +1,4 @@
 %span
   %a{href: link.url}= link.title
+  = render partial: 'links/reading_list_button', locals: { link: link }
   = edit_link_button(link)

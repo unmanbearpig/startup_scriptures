@@ -16,4 +16,7 @@ class User < ActiveRecord::Base
     saved_link.delete
   end
 
+  def has_link? link
+    saved_links.exists?(link: link)
+  end
 end
