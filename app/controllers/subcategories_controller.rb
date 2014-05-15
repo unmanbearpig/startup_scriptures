@@ -13,9 +13,10 @@ class SubcategoriesController < ApplicationController
     @subcategory = @category.subcategories.create subcategory_params
 
     if @subcategory.valid?
+      flash[:notice] = "Subcategory #{@subcategory.name} was created"
       redirect_to @category
     else
-      flash_messages_from_errors(@category.errors)
+      flash_messages_from_errors(@subcategory.errors)
       redirect_to :back
     end
   end
@@ -38,6 +39,7 @@ class SubcategoriesController < ApplicationController
       flash[:notice] = "Subcategory '#{@subcategory.name}' was successfully updated"
       redirect_to @subcategory.category
     else
+      flash_messages_from_errors(@subcategory.errors)
       redirect_to :back
     end
   end
