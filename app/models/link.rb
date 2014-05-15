@@ -4,5 +4,8 @@ class Link < ActiveRecord::Base
   validates :subcategory_id, presence: true
 
   belongs_to :subcategory
-  belongs_to :category
+
+  def category
+    subcategory.category
+  end
 end

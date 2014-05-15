@@ -1,0 +1,13 @@
+= set_title title
+- form_for_record = defined?(subcategory) ? [subcategory, link] : link
+= form_for form_for_record, html: { role: 'form'} do |f|
+  .form-group
+    = f.label :title, for: 'title'
+    = f.text_field :title, id: 'title'
+
+  .form-group
+    = f.label :url, for: 'url'
+    = f.text_field :url, id: 'url'
+
+  %button.btn.btn-default{type: 'submit'}
+    = button_text

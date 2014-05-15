@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   resources :categories do
     resources :subcategories, shallow: true do
-      resources :links, shallow: true
+      resources :links
     end
   end
 
