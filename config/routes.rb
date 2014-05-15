@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   root 'categories#index'
 
   resources :categories do
-    resources :subcategories, shallow: true
+    resources :subcategories, shallow: true do
+      resources :links, shallow: true
+    end
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
