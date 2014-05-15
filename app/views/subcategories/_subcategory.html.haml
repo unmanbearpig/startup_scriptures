@@ -1,4 +1,6 @@
-%h3= subcategory.name
+%h3
+  = subcategory.name
+  = edit_subcategory_dropdown(subcategory)
 %ul
   - subcategory.links.each do |link|
     %li

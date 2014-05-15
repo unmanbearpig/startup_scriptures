@@ -1,7 +1,8 @@
 class SubcategoriesController < ApplicationController
   layout 'with_categories_header'
 
-  before_action :set_category, only: %i(new create)
+  before_action :find_category, only: %i(new create)
+  before_action :find_subcategory, only: %i(destroy edit update)
   before_action :make_sure_admin_signed_in
 
   def new
@@ -19,12 +20,35 @@ class SubcategoriesController < ApplicationController
     end
   end
 
-  def delete
+  def destroy
+    if @subcategory.delete
+      flash[:notice] = 'Subcategory was successfully deleted'
+    else
+      flash[:alert] = 'Could not delete subcategory'
+    end
+    redirect_to :back
+  end
+
+  def edit
+  end
+
+  def update
+    @subcategory.update(subcategory_params)
+    if @subcategory.valid?
+      flash[:notice] = "Subcategory '#{@subcategory.name}' was successfully updated"
+      redirect_to @subcategory.category
+    else
+      redirect_to :back
+    end
   end
 
   private
 
-  def set_category
+  def find_subcategory
+    @subcategory ||= Subcategory.find(params[:id])
+  end
+
+  def find_category
     @category ||= Category.find(params[:category_id])
   end
 

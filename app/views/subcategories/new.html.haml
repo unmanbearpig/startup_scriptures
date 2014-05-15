@@ -1,8 +1,1 @@
-= set_title 'New Subcategory'
-= form_for [@category, @subcategory], html: { role: 'form'} do |f|
-  .form-group
-    = f.label :name, for: 'name'
-    = f.text_field :name, id: 'name'
-
-  %button.btn.btn-default{type: 'submit'}
-    Create
+= render partial: 'form', locals: {title: 'New subcategory', button_text: 'Create', category: @category, subcategory: @subcategory}

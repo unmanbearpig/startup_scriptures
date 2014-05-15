@@ -22,7 +22,12 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
-    @category.delete
+    if @category.delete
+      flash[:notice] = 'Category was successfully deleted'
+    else
+      flash[:alert] = 'Could not delete category'
+    end
+
     redirect_to categories_path
   end
 
