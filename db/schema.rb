@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20140514152139) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "categories", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -27,7 +30,7 @@ ActiveRecord::Schema.define(version: 20140514152139) do
     t.integer  "subcategory_id"
   end
 
-  add_index "links", ["subcategory_id"], name: "index_links_on_subcategory_id"
+  add_index "links", ["subcategory_id"], name: "index_links_on_subcategory_id", using: :btree
 
   create_table "subcategories", force: true do |t|
     t.string   "name"
@@ -36,7 +39,7 @@ ActiveRecord::Schema.define(version: 20140514152139) do
     t.datetime "updated_at"
   end
 
-  add_index "subcategories", ["category_id"], name: "index_subcategories_on_category_id"
+  add_index "subcategories", ["category_id"], name: "index_subcategories_on_category_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -54,7 +57,7 @@ ActiveRecord::Schema.define(version: 20140514152139) do
     t.boolean  "is_admin"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end
