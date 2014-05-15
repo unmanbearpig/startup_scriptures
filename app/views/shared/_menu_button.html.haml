@@ -1,0 +1,12 @@
+.btn-group
+  %button.btn.btn-default.dropdown-toggle{type: "button", class: button_class, 'data-toggle' => 'dropdown'}
+    = title
+    %span.caret
+  %ul.dropdown-menu{role: 'menu'}
+    - items.each do |item|
+      - case item
+      - when :separator then
+        %li.divider
+      - else
+        %li
+          = link_to item[:title], item[:url], item[:options]

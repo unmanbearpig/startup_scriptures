@@ -8,9 +8,11 @@ class ApplicationController < ActionController::Base
   helper CategoriesHelper
   helper AuthHelper
   helper FlashHelper
+  helper LayoutHelper
 
   include FlashHelper
   include AuthHelper
+  include LayoutHelper
 
   protected
 
