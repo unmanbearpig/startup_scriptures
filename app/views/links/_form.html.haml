@@ -9,5 +9,9 @@
     = f.label :url, for: 'url'
     = f.text_field :url, id: 'url'
 
+  .form-group
+    = f.label 'Tags (separated by commas)', for: 'tag_list'
+    = f.text_field :tag_list, id: 'tag_list'
+
   %button.btn.btn-default{type: 'submit'}
     = button_text

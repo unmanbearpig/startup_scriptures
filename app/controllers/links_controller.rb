@@ -5,6 +5,18 @@ class LinksController < ApplicationController
   before_action :find_link, only: %i(destroy edit update)
   before_action :make_sure_admin_signed_in
 
+  def search
+    query = params[:q]
+    if query.empty?
+      flash[:alert] = 'Search query is empty'
+      redirect_to root_path
+    end
+
+    tags_query = query.gsub(/\s+/, ' ').split(' ')
+
+    @links = Link.tagged_with(tags_query, any: true, wild: true)
+  end
+
   def new
     @link = @subcategory.links.new
   end
@@ -56,6 +68,6 @@ class LinksController < ApplicationController
   end
 
   def link_params
-    params.require(:link).permit(:url, :title)
+    params.require(:link).permit(:url, :title, :tag_list)
   end
 end

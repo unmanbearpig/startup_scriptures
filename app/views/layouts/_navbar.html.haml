@@ -9,6 +9,8 @@
       %a.navbar-brand{href: root_path} Startup Scriptures
     .collapse.navbar-collapse
       #main-navbar-collapse
+        = render 'layouts/search_field'
+
         %ul.nav.navbar-nav.navbar-right
           - if user_signed_in?
             %li

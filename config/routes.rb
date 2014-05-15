@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'search' => 'links#search', as: :links_search
+
   devise_for :users
   root 'categories#index'
 

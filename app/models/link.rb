@@ -5,6 +5,8 @@ class Link < ActiveRecord::Base
 
   belongs_to :subcategory
 
+  acts_as_taggable
+
   def category
     subcategory.category
   end
