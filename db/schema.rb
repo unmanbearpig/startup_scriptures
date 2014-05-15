@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140515185939) do
+ActiveRecord::Schema.define(version: 20140515210548) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,16 @@ ActiveRecord::Schema.define(version: 20140515185939) do
   end
 
   add_index "links", ["subcategory_id"], name: "index_links_on_subcategory_id", using: :btree
+
+  create_table "saved_links", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "link_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "saved_links", ["link_id"], name: "index_saved_links_on_link_id", using: :btree
+  add_index "saved_links", ["user_id"], name: "index_saved_links_on_user_id", using: :btree
 
   create_table "subcategories", force: true do |t|
     t.string   "name"
