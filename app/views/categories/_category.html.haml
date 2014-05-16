@@ -1,6 +1,7 @@
 .col-md-3.category-grid-item
   .thumbnail
-    .grab-circle
+    - if user_signed_in?
+      .grab-circle
     .caption
       = link_to category do
         %h3.category-title= category.name
