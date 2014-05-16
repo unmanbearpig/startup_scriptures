@@ -1,5 +1,11 @@
-= link_to category.name, category
-%ul.links-list
-  - category.links.each do |link|
-    %li
-      = render link
+.col-md-3.category-grid-item
+  .thumbnail
+    .grab-circle
+    .caption
+      = link_to category do
+        %h3.category-title= category.name
+      %p
+        %ul.links-list
+          - category.links.each do |link|
+            %li
+              = render link
