@@ -2,7 +2,7 @@ class CategoriesController < ApplicationController
   layout 'with_categories_header'
 
   before_action :make_sure_admin_signed_in, except: %i(index show)
-  before_action :find_category, only: %i(show edit update delete)
+  before_action :find_category, except: %i(index new create)
 
   def index
     render layout: 'with_header'
@@ -37,6 +37,12 @@ class CategoriesController < ApplicationController
   def update
     @category.update(category_params)
     redirect_to_resource_if_valid @category
+  end
+
+  def move
+    position = params[:position]
+
+    current_user.move_category(@category, position)
   end
 
   private

@@ -1,6 +1,10 @@
 module CategoriesHelper
   def categories
-    @categories ||= Category.all
+    @categories ||= if user_signed_in?
+                      current_user.ordered_categories
+                    else
+                      Category.all
+                    end
   end
 
   def current_category

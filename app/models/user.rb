@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 
   has_many :saved_links
   has_many :links, through: :saved_links
+  has_many :user_category_positions
 
   def save_link link
     saved_links.create(link: link)
@@ -18,5 +19,29 @@ class User < ActiveRecord::Base
 
   def has_link? link
     saved_links.exists?(link: link)
+  end
+
+  def ordered_categories order = :asc
+    fail InvalidArgument.new('Invalid order') unless %i(asc desc).include?(order)
+
+    Category.joins("LEFT JOIN user_category_positions
+ON user_category_positions.category_id = categories.id
+AND user_category_positions.user_id = #{id}")
+      .order("user_category_positions.position #{order}")
+  end
+
+  def category_position(category)
+    UserCategoryPosition.find_by(user: self, category: category)
+  end
+
+  def move_category(category, position)
+    category_positions
+      .where(category: category)
+      .first_or_create
+      .insert_at(position)
+  end
+
+  def category_positions
+    user_category_positions
   end
 end
