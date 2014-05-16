@@ -1,5 +1,7 @@
 - if user_signed_in?
   - if current_user.has_link?(link)
-    = link_to '(X)', delete_saved_link_path(link), method: :delete
+    = link_to delete_saved_link_path(link), method: :delete do
+      %span.glyphicon.glyphicon-star
   - else
-    = link_to '(+)', save_link_path(link), method: :post
+    = link_to save_link_path(link), method: :post do
+      %span.glyphicon.glyphicon-star-empty
