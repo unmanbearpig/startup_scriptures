@@ -1,0 +1,5 @@
+- if user_signed_in?
+  = link_to upvote_link_path(link), method: :post do
+    %span.glyphicon.glyphicon-arrow-up
+  = link_to downvote_link_path(link), method: :post do
+    %span.glyphicon.glyphicon-arrow-down

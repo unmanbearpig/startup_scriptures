@@ -2,8 +2,9 @@ class LinksController < ApplicationController
   layout 'with_categories_header'
 
   before_action :find_subcategory, only: %i(new create)
-  before_action :find_link, only: %i(destroy edit update)
-  before_action :make_sure_admin_signed_in, except: %i(search)
+  before_action :find_link, except: %i(search new create)
+  before_action :make_sure_admin_signed_in, only: %i(new create destroy edit update)
+  before_action :make_sure_user_can_vote, only: %i(upvote downvote unvote)
 
   def search
     query = params[:q]
@@ -57,6 +58,21 @@ class LinksController < ApplicationController
     end
   end
 
+  def upvote
+    @link.upvote_by(current_user)
+    redirect_to :back
+  end
+
+  def downvote
+    @link.downvote_by(current_user)
+    redirect_to :back
+  end
+
+  def unvote
+    @link.unvote_by(current_user)
+    redirect_to :back
+  end
+
   private
 
   def find_link
@@ -69,5 +85,12 @@ class LinksController < ApplicationController
 
   def link_params
     params.require(:link).permit(:url, :title, :tag_list)
+  end
+
+  def make_sure_user_can_vote
+    unless user_signed_in?
+      flash[:alert] = "Please sign in to vote"
+      redirect_to :back
+    end
   end
 end

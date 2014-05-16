@@ -7,7 +7,13 @@ Rails.application.routes.draw do
 
   resources :categories do
     resources :subcategories, shallow: true do
-      resources :links
+      resources :links do
+        member do
+          post 'upvote'
+          post 'downvote'
+          post 'unvote'
+        end
+      end
     end
   end
 
