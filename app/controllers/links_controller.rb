@@ -3,7 +3,7 @@ class LinksController < ApplicationController
 
   before_action :find_subcategory, only: %i(new create)
   before_action :find_link, only: %i(destroy edit update)
-  before_action :make_sure_admin_signed_in
+  before_action :make_sure_admin_signed_in, except: %i(search)
 
   def search
     query = params[:q]
