@@ -1,7 +1,8 @@
 class CategoriesController < ApplicationController
   layout 'with_categories_header'
 
-  before_action :make_sure_admin_signed_in, except: %i(index show)
+  before_action :make_sure_admin_signed_in, only: %i(new create destroy edit update)
+  before_action :make_sure_user_signed_in, only: %i(reorder reorder_subcategories)
   before_action :find_category, except: %i(index new create reorder)
 
   def index
@@ -11,6 +12,7 @@ class CategoriesController < ApplicationController
   end
 
   def show
+    gon.push({reorder_subcategories_path: category_reorder_subcategories_path(@category)})
   end
 
   def new
@@ -62,14 +64,37 @@ class CategoriesController < ApplicationController
     end
   end
 
+  def reorder_subcategories
+    subcategory_ids = params[:subcategory_ids]
+
+    respond_to do |format|
+      format.json do
+        subcategories_array = subcategory_ids
+          .reject(&:empty?)
+          .map(&:to_i)
+          .map { |id| @category.subcategories.find(id) }
+
+        render :json => { success: current_user.set_subcategory_order(@category, subcategories_array) }
+      end
+    end
+  end
+
   private
 
   def find_category
-    @category = Category.find(params[:id])
+    id = params[:id] || params[:category_id]
+    @category = Category.find(id)
   end
 
   def category_params
     params.require(:category).permit(:name)
+  end
+
+  def make_sure_user_signed_in
+    unless user_signed_in?
+      flash[:alert] = 'You have to sign in to use this feature'
+      redirect_to :back
+    end
   end
 
 end

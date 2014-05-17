@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   post 'categories/reorder' => 'categories#reorder', as: :reorder_categories
   resources :categories do
+    post 'reorder_subcategories'
     resources :subcategories, shallow: true do
       resources :links do
         member do

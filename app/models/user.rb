@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_many :saved_links
   has_many :links, through: :saved_links
   has_many :user_category_positions
+  has_many :user_category_subcategory_positions
 
   def save_link link
     saved_links.create(link: link)
@@ -30,6 +31,16 @@ AND user_category_positions.user_id = #{id}")
       .order("user_category_positions.position #{order}")
   end
 
+  def ordered_subcategories category, order = :asc
+    fail InvalidArgument.new('Invalid order') unless %i(asc desc).include?(order)
+
+    Subcategory.joins("LEFT JOIN user_category_subcategory_positions
+ON user_category_subcategory_positions.subcategory_id = subcategories.id
+AND user_category_subcategory_positions.user_id = #{self.id}")
+      .where(category: category)
+      .order("user_category_subcategory_positions.position #{order}")
+  end
+
   def category_position category
     UserCategoryPosition.find_by(user: self, category: category)
   end
@@ -43,7 +54,23 @@ AND user_category_positions.user_id = #{id}")
     end
   end
 
+  def set_subcategory_order category, subcategories_array
+    subcategories_array.each_index do |index|
+      subcategory = subcategories_array[index]
+      position = index + 1
+
+      subcategory_positions(category)
+        .where(subcategory: subcategory)
+        .first_or_create
+        .update(position: position)
+    end
+  end
+
   def category_positions
     user_category_positions
+  end
+
+  def subcategory_positions category
+    user_category_subcategory_positions.where(category: category)
   end
 end
