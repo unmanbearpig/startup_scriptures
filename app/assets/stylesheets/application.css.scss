@@ -1,6 +1,8 @@
 /*
  *= require jquery.ui.all
- *= require_tree .
  *= require_self
  */
+
+@import "common";
+@import "**/*";
 @import "bootstrap";

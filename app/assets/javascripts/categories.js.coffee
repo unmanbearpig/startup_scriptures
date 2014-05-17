@@ -2,8 +2,8 @@ reorderCategories = (category_ids) ->
   $.post(gon.reorder_categories_path, {category_ids: category_ids})
 
 $(document).ready () ->
-  selector = ".sortable"
-  handle_selector = '.grab-circle'
+  selector = ".categories-grid.sortable"
+  handle_selector = '.category-handle'
 
   $( selector ).sortable({
     handle: handle_selector,

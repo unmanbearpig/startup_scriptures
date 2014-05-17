@@ -3,22 +3,12 @@
     margin-left: 2px;
 }
 
-$grab-circle-radius: 12px;
-
 .category-placeholder {
-    $border-width: 3px;
-    border-style: dashed !important;
-    border-width: $border-width !important;
-    height: 100px;
+    @extend .drag-and-drop-placeholder;
 }
 
-.grab-circle {
-    border-radius: $grab-circle-radius;
-    background-color: #888;
-
-    width: $grab-circle-radius *2;
-    height: $grab-circle-radius *2;
-
+.category-handle {
+    @extend .grab-circle;
     position: absolute;
     margin-top: -$grab-circle-radius;
     right: 6px;
