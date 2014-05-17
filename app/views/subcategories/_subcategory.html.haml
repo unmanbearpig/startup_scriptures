@@ -1,7 +1,9 @@
-%h3
-  = subcategory.name
-  = edit_subcategory_dropdown(subcategory)
-%ul
-  - subcategory.links.each do |link|
-    %li
-      = render link
+.subcategory-list-item{'data-subcategory-id' => subcategory.id}
+  %h3
+    = subcategory.name
+    = edit_subcategory_dropdown(subcategory)
+    .subcategory-handle
+  %ul
+    - subcategory.links.each do |link|
+      %li
+        = render link

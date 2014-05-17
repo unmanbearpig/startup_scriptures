@@ -2,5 +2,6 @@
 
 = edit_category_dropdown
 
-- @category.subcategories.each do |subcategory|
-  = render subcategory
+.subcategories-list.sortable
+  - subcategories(@category).each do |subcategory|
+    = render subcategory
