@@ -1,5 +1,5 @@
 reorderCategories = (category_ids) ->
-  $.post(gon.reorder_categories_path, {category_ids: category_ids}
+  $.post(gon.reorder_categories_path, {category_ids: category_ids})
 
 $(document).ready () ->
   selector = ".sortable"
