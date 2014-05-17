@@ -2,7 +2,8 @@
   %h3
     = subcategory.name
     = edit_subcategory_dropdown(subcategory)
-    .subcategory-handle
+    - if user_signed_in?
+      .subcategory-handle
   %ul
     - subcategory.links.each do |link|
       %li
