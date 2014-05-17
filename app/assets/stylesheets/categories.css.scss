@@ -1,13 +1,16 @@
-// Place all the styles related to the categories controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-
 .category-title {
     margin-top: 2px;
     margin-left: 2px;
 }
 
 $grab-circle-radius: 12px;
+
+.category-placeholder {
+    $border-width: 3px;
+    border-style: dashed !important;
+    border-width: $border-width !important;
+    height: 100px;
+}
 
 .grab-circle {
     border-radius: $grab-circle-radius;
@@ -17,6 +20,6 @@ $grab-circle-radius: 12px;
     height: $grab-circle-radius *2;
 
     position: absolute;
-    margin-top: -($grab-circle-radius + 4);
+    margin-top: -$grab-circle-radius;
     right: 6px;
 }

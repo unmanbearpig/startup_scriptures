@@ -1,7 +1,7 @@
-.col-md-3.category-grid-item
+.col-md-3.category-grid-item{id: "category-#{category.id}", 'data-category-id' => category.id}
+  - if user_signed_in?
+    .grab-circle
   .thumbnail
-    - if user_signed_in?
-      .grab-circle
     .caption
       = link_to category do
         %h3.category-title= category.name

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   devise_for :users
 
+  post 'categories/reorder' => 'categories#reorder', as: :reorder_categories
   resources :categories do
     resources :subcategories, shallow: true do
       resources :links do

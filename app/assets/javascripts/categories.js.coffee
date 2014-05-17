@@ -1,3 +1,18 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+reorderCategories = (category_ids) ->
+  $.post(gon.reorder_categories_path, {category_ids: category_ids}
+
+$(document).ready () ->
+  selector = ".sortable"
+  handle_selector = '.grab-circle'
+
+  $( selector ).sortable({
+    handle: handle_selector,
+    revert: 100,
+    tolerance: 'pointer',
+    placeholder: 'category-placeholder col-md-3 thumbnail',
+    forcePlaceholderSize: true,
+    beforeStop: (event, ui) ->
+      categoriesOrder = $(selector).sortable('toArray', { attribute: 'data-category-id'})
+      reorderCategories(categoriesOrder)
+  })
+  $( handle_selector ).disableSelection()
