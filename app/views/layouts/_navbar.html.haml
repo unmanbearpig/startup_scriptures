@@ -12,6 +12,8 @@
         = render 'layouts/search_field'
 
         %ul.nav.navbar-nav.navbar-right
+          %li
+            %a{href: root_path} My Dashboard
           - if user_signed_in?
             %li
               %a{href: reading_list_path} Reading list
