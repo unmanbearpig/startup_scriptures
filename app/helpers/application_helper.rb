@@ -3,6 +3,11 @@ module ApplicationHelper
     content_for(:title) do
       title
     end
-    content_tag(:h1, title)
+
+    if block_given?
+      yield(title)
+    else
+      content_tag(:h1, title)
+    end
   end
 end

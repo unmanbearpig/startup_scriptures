@@ -1,8 +1,9 @@
 .col-sm-6
+  - set_title @category.name do |title|
+    %h1
+      = title
+      = edit_category_dropdown
 
-  = set_title @category.name
-
-  = edit_category_dropdown
 
   .subcategories-list.sortable
     - subcategories(@category).each do |subcategory|
