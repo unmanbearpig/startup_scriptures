@@ -1,7 +1,9 @@
-= set_title @category.name
+.col-sm-6
 
-= edit_category_dropdown
+  = set_title @category.name
 
-.subcategories-list.sortable
-  - subcategories(@category).each do |subcategory|
-    = render subcategory
+  = edit_category_dropdown
+
+  .subcategories-list.sortable
+    - subcategories(@category).each do |subcategory|
+      = render subcategory
