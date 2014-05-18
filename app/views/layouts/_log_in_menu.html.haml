@@ -1,0 +1,13 @@
+- if user_signed_in?
+  %li.dropdown.log-in-dropdown
+    %a.dropdown-toggle(href='#' data-toggle="dropdown")
+      = current_user.email
+      - if current_user.is_admin
+        (Admin)
+      %b.caret
+    %ul.dropdown-menu
+      %li
+        = link_to 'Log out', destroy_user_session_path, method: :delete
+- else
+  %li
+    = link_to 'Log in/Register', new_user_session_path, class: ''

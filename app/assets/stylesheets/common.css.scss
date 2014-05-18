@@ -37,3 +37,7 @@ $header-padding-top: $header-navbar-height - $header-buttons-height;
 .image-spacer-hack {
     height: $header-navbar-height - $header-padding-top;
 }
+
+.log-in-dropdown.open > a {
+    background-color: transparent !important;
+}

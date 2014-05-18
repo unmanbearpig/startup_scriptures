@@ -15,11 +15,4 @@
                 %a{href: root_path} My Dashboard
               %li
                 %a{href: reading_list_path} Reading list
-            - if user_signed_in?
-              %li
-                %a{href: '#'}
-                  = current_user.email
-                  - if current_user.is_admin
-                    (Admin)
-            %li
-              = render 'layouts/log_in_link'
+            = render 'layouts/log_in_menu'
