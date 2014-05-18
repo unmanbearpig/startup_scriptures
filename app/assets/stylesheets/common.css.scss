@@ -18,3 +18,22 @@ $grab-circle-radius: 12px;
 .link-buttons {
     float: right;
 }
+
+
+$header-navbar-height: 100px;
+$header-buttons-height: 50px;
+$header-padding-top: $header-navbar-height - $header-buttons-height;
+
+.navbar-logo {
+    position: absolute;
+    top: 0px;
+    height: $header-navbar-height;
+}
+
+.header-bar {
+    padding-top: $header-padding-top;
+}
+
+.image-spacer-hack {
+    height: $header-navbar-height - $header-padding-top;
+}
