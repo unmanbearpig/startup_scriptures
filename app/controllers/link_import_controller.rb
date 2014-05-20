@@ -8,6 +8,12 @@ class LinkImportController < ApplicationController
 
   def import
     file = params[:file]
+
+    if file.nil?
+      flash[:alert] = 'File is not selected'
+      return redirect_to :back
+    end
+
     csv_links = CsvLinkImport.new file_path: file.path
 
     unless csv_links.valid?
