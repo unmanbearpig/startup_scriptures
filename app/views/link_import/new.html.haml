@@ -1,0 +1,6 @@
+= form_tag import_links_path, multipart: true do
+  .form-group
+    = label :file, 'CSV File'
+    = file_field_tag :file, id: 'file'
+  %button.btn.btn-default{type: 'submit'}
+    Import

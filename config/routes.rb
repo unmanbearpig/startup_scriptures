@@ -23,6 +23,9 @@ Rails.application.routes.draw do
   post 'saved_link/:link_id' => 'saved_links#create', as: :save_link
   delete 'saved_link/:link_id' => 'saved_links#delete', as: :delete_saved_link
 
+  get 'import_links' => 'link_import#new', as: :import_links_form
+  post 'import_links' => 'link_import#import', as: :import_links
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

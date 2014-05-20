@@ -1,5 +1,3 @@
-require 'csv'
-
 class CsvLinkImport
   include ActiveModel::Model
   include ActiveModel::Validations::Callbacks
@@ -10,7 +8,18 @@ class CsvLinkImport
   attr_accessor :file_path
 
   def options
-    @options ||= {headers: :first_line}
+    @options ||= {
+      remove_unmapped_keys: true,
+      key_mapping: {
+        category: :category_name,
+        subcategory: :subcategory_name,
+        category_name: :category_name,
+        subcategory_name: :subcategory_name,
+        title: :title,
+        url: :url,
+        tags: :tags
+      }
+    }
   end
 
   def save
@@ -21,28 +30,33 @@ class CsvLinkImport
     return @links if defined?(@links)
 
     @links = []
-    CSV.foreach file_path, options do |row|
-      hash = row.to_hash
-      hash['category_name'] = hash['category'] if hash.has_key?('category')
-      hash['subcategory_name'] = hash['subcategory'] if hash.has_key?('subcategory')
 
-      link = LinkImport.new(hash)
-      @links << link
+    SmarterCSV.process(file_path, options) do |chunk|
+      chunk.each do |row|
+        @links << LinkImport.new(row)
+      end
     end
+
     @links
   end
 
   def validate_links
     if links.nil? || links.empty?
-      errors.add(:csv, 'Could not read csv file')
+      errors[:base] << 'An error occured while reading CSV file'
     end
+
     links.each { |link| validate_link(link) }
   end
 
   def validate_link link
+    if link.nil?
+      errors.add(:link, 'could not be created')
+      return
+    end
+
     unless link.valid?
       link.errors.full_messages.each do |msg|
-        errors.add(link.url, msg)
+        errors[:base] << ("Link #{link.url}: #{msg}")
       end
     end
   end

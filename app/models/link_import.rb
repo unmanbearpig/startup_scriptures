@@ -9,14 +9,14 @@ class LinkImport
   validates :subcategory, presence: true
   validates :title, presence: true
   validates :url, presence: true
-  validate :validate_link
 
   def save
-    puts 'save'
     link.save!
   end
 
   def link
+    return nil unless subcategory
+
     @link ||= subcategory.links.where(url: url).first_or_initialize
     @link.tag_list = tags
     @link.title = title
@@ -28,14 +28,7 @@ class LinkImport
   end
 
   def subcategory
+    return nil unless category
     @subcategory ||= category.subcategories.where(name: subcategory_name).first
-  end
-
-  def validate_link
-    unless link.valid?
-      link.errors.full_messages.each do |msg|
-        errors.add(:link, msg)
-      end
-    end
   end
 end
