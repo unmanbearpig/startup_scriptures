@@ -5,7 +5,7 @@ class CsvLinkImport
   validates :file_path, presence: true, allow_blank: false
   validate :validate_links
 
-  attr_accessor :file_path
+  attr_accessor :file_path, :create_categories
 
   def options
     @options ||= {
@@ -22,6 +22,14 @@ class CsvLinkImport
     }
   end
 
+  def create_categories?
+    @create_categories || false
+  end
+
+  def create_categories= bool
+    @create_categories = bool
+  end
+
   def save
     links.reduce(true) { |result, link| link.save && result }
   end
@@ -33,7 +41,9 @@ class CsvLinkImport
 
     SmarterCSV.process(file_path, options) do |chunk|
       chunk.each do |row|
-        @links << LinkImport.new(row)
+        link = LinkImport.new(row)
+        link.create_categories = create_categories
+        @links << link
       end
     end
 

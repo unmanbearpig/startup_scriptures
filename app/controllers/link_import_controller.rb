@@ -7,19 +7,7 @@ class LinkImportController < ApplicationController
   end
 
   def import
-    file = params[:file]
-
-    if file.nil?
-      flash[:alert] = 'File is not selected'
-      return redirect_to :back
-    end
-
-    csv_links = CsvLinkImport.new file_path: file.path
-
-    unless csv_links.valid?
-      flash_messages_from_errors csv_links.errors
-      return redirect_to :back
-    end
+    return unless csv_links
 
     if csv_links.save
       links_count = csv_links.links.count
@@ -29,5 +17,34 @@ class LinkImportController < ApplicationController
     end
 
     redirect_to :back
+  end
+
+  private
+
+  def csv_links
+    return nil unless file
+    return @csv_links if defined?(@csv_links)
+
+    @csv_links = CsvLinkImport.new file_path: file.path
+    @csv_links.create_categories = create_categories
+    unless @csv_links.valid?
+      flash_messages_from_errors @csv_links.errors
+      redirect_to :back
+      return nil
+    end
+
+    @csv_links
+  end
+
+  def file
+    return @file if @file || @file = params[:file]
+
+    flash[:alert] = 'File is not selected'
+    redirect_to :back
+    return nil
+  end
+
+  def create_categories
+    return  @create_categories || @create_categories = params[:create_categories] || false
   end
 end

@@ -10,6 +10,11 @@ class LinkImport
   validates :title, presence: true
   validates :url, presence: true
 
+  attr_writer :create_categories
+  def create_categories?
+    @create_categories ||= false
+  end
+
   def save
     link.save!
   end
@@ -24,11 +29,32 @@ class LinkImport
   end
 
   def category
-    @category ||= Category.where(name: category_name).first
+    return @category if defined?(@category)
+
+    @category_count = 0 unless defined?(@category_count)
+    @category_count += 1
+
+    puts "#category #{@category_count}"
+
+    binding.pry if @category_count > 10
+
+    category_relation = Category.where(name: category_name)
+
+    @category = create_categories? ? category_relation.first_or_create : category_relation.first
+
+    binding.pry
+
+    @category
   end
 
   def subcategory
     return nil unless category
-    @subcategory ||= category.subcategories.where(name: subcategory_name).first
+    return @subcategory if defined?(@subcategory)
+
+    puts '#subcategory'
+
+    subcategory_relation = category.subcategories.where(name: subcategory_name)
+
+    @subcategory = create_categories? ? subcategory_relation.first_or_create : subcategory_relation.first
   end
 end

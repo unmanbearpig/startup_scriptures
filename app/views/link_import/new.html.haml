@@ -1,4 +1,9 @@
+= set_title 'Import links'
+
 = form_tag import_links_path, multipart: true do
+  .form-group
+    = label :create_categories, 'Create categories'
+    = check_box_tag :create_categories
   .form-group
     = label :file, 'CSV File'
     = file_field_tag :file, id: 'file'
