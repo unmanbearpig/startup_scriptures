@@ -19,6 +19,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'recent' => 'links#recent', as: :recent_links
+
   get 'reading_list' => 'saved_links#index', as: :reading_list
   post 'saved_link/:link_id' => 'saved_links#create', as: :save_link
   delete 'saved_link/:link_id' => 'saved_links#delete', as: :delete_saved_link

@@ -1,0 +1,16 @@
+%table.table.table-striped
+  %thead
+    %th Link
+    %th Category
+    %th Subcategory
+    %th Last updated (or created)
+    %th Tags
+  %tbody
+    - unless links.nil?
+      - links.each do |link|
+        %tr
+          %td= render link
+          %td= link_to link.category, link.category
+          %td= link_to link.subcategory, link.subcategory
+          %td= time_ago_in_words(link.updated_at) + ' ago'
+          %td= link.tag_list
