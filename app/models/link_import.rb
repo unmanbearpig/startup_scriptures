@@ -34,15 +34,9 @@ class LinkImport
     @category_count = 0 unless defined?(@category_count)
     @category_count += 1
 
-    puts "#category #{@category_count}"
-
-    binding.pry if @category_count > 10
-
     category_relation = Category.where(name: category_name)
 
     @category = create_categories? ? category_relation.first_or_create : category_relation.first
-
-    binding.pry
 
     @category
   end
