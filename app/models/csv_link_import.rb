@@ -50,6 +50,10 @@ class CsvLinkImport
     @links
   end
 
+  def valid_links
+    links.select { |l| l.valid? }.map(&:link)
+  end
+
   def validate_links
     if links.nil? || links.empty?
       errors[:base] << 'An error occured while reading CSV file'
