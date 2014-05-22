@@ -16,7 +16,7 @@ class LinkImportController < ApplicationController
       flash[:alert] = 'Could not import links'
     end
 
-    redirect_to :back
+    @links = csv_links.valid_links
   end
 
   private
