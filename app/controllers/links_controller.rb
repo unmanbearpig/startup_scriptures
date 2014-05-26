@@ -35,7 +35,7 @@ class LinksController < ApplicationController
   end
 
   def destroy
-    if @link.delete
+    if @link.destroy
       flash[:notice] = "Link was successfully deleted"
     else
       flash[:alert] = "Could not delete link"

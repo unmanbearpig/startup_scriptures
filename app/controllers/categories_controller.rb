@@ -24,7 +24,7 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
-    if @category.delete
+    if @category.destroy
       flash[:notice] = 'Category was successfully deleted'
     else
       flash[:alert] = 'Could not delete category'

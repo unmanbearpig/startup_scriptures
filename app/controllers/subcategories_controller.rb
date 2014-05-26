@@ -22,7 +22,7 @@ class SubcategoriesController < ApplicationController
   end
 
   def destroy
-    if @subcategory.delete
+    if @subcategory.destroy
       flash[:notice] = 'Subcategory was successfully deleted'
     else
       flash[:alert] = 'Could not delete subcategory'
