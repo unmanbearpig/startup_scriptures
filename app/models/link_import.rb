@@ -52,6 +52,8 @@ class LinkImport
   end
 
   def validate_link
+    return false unless link
+
     unless link.valid?
       errors.add(:link, 'is not valid')
       link.errors.each { |e| errors.add(e[0], e[1]) }
