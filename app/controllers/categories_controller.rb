@@ -7,8 +7,6 @@ class CategoriesController < ApplicationController
 
   def index
     gon.push({reorder_categories_path: reorder_categories_path})
-
-    render layout: 'with_header'
   end
 
   def show
