@@ -55,8 +55,9 @@ class LinkImport
     return false unless link
 
     unless link.valid?
-      errors.add(:link, 'is not valid')
-      link.errors.each { |e| errors.add(e[0], e[1]) }
+      link.errors.each_entry do |e|
+        errors.add(e[0], e[1])
+      end
     end
   end
 end
