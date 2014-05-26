@@ -1,9 +1,11 @@
 class LinksController < ApplicationController
+  include ActionView::Helpers::TextHelper
+
   layout 'with_categories_header'
 
   before_action :find_subcategory, only: %i(new create)
   before_action :find_link, only: %i(edit update destroy upvote downvote)
-  before_action :make_sure_admin_signed_in, only: %i(new create destroy edit update links_without_titles recent)
+  before_action :make_sure_admin_signed_in, only: %i(new create destroy edit update links_without_titles recent fetch_missing_titles)
   before_action :make_sure_user_can_vote, only: %i(upvote downvote unvote)
 
   def search
@@ -80,6 +82,12 @@ class LinksController < ApplicationController
 
   def links_without_titles
     @links = Link.no_title.all
+  end
+
+  def fetch_missing_titles
+    count = Link.fetch_missing_titles
+    flash[:notice] = "Fetching #{pluralize(count, 'missing title')}"
+    redirect_to :back
   end
 
   private

@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   root 'categories#index'
 
@@ -6,8 +8,13 @@ Rails.application.routes.draw do
   devise_for :users
 
 
+  admin_constraint = ->(request) { request.env['warden'].authenticate? && request.env['warden'].user.is_admin }
+  constraints admin_constraint do
+    mount Sidekiq::Web, at: '/sidekiq'
+  end
   get 'links/recent' => 'links#recent', as: :recent_links
   get 'links/no_titles' => 'links#links_without_titles', as: :links_without_titles
+  post 'links/fetch_missing_titles' => 'links#fetch_missing_titles', as: :fetch_missing_titles
 
   get 'reading_list' => 'saved_links#index', as: :reading_list
   post 'saved_link/:link_id' => 'saved_links#create', as: :save_link

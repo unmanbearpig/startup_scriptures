@@ -10,7 +10,7 @@ class Link < ActiveRecord::Base
 
   before_validation :fix_url
 
-  after_save :fetch_title_and_save!
+  after_save :async_fetch_title_and_save
 
   scope :no_title, -> { where("title is null or title = ''") }
 
@@ -40,23 +40,20 @@ class Link < ActiveRecord::Base
     end
   end
 
-  def fetch_title_and_save!
-    fetch_title_async do
-      save! if title
-    end
-  end
+  def async_fetch_title_and_save
+    return if self.title
 
-  def fetch_title_async &block
-    if title.nil? || title.empty?
-      TitleFetcher.new(url).async_title do |title|
-        self.title = title
-        yield
-      end
-    end
+    TitleFetcherWorker.perform_async(self.id)
   end
 
   def to_s
     return title unless title.nil? || title.empty?
     return hostname
+  end
+
+  def self.fetch_missing_titles
+    ids_to_fetch = no_title.pluck(:id)
+    ids_to_fetch.each { |id| TitleFetcherWorker.perform_async(id) }
+    return ids_to_fetch.count
   end
 end

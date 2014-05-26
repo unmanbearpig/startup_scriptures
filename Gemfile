@@ -64,3 +64,11 @@ gem 'smarter_csv'
 # for title fetching
 gem 'nokogiri'
 gem 'typhoeus'
+
+# sidekiq
+gem 'sidekiq'
+gem 'sinatra', require: false
+gem 'slim'
+
+# server
+gem 'puma'

@@ -1,3 +1,8 @@
-= set_title 'Links with no titles'
+= set_title "#{pluralize(@links.count, 'link')} have no #{@links.count > 1 ? 'titles' : 'title'}"
+
+= form_tag fetch_missing_titles_path do
+  %button.btn.btn-default{type: 'submit'}
+    Fetch missing titles
+
 
 = render partial: 'link_list', locals: { links: @links }

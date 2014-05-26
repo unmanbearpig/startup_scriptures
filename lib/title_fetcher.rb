@@ -9,10 +9,6 @@ class TitleFetcher
     @title ||= doc.title
   end
 
-  def async_title &block
-    Thread.new { yield(title) }
-  end
-
   def errors
     @errors ||= []
   end
