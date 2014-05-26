@@ -21,6 +21,10 @@ class Link < ActiveRecord::Base
     subcategory.category
   end
 
+  def hostname
+    URI(url).hostname
+  end
+
   def fix_url
     unless url =~ /:\/\// # no protocol
       if url =~ /\A[\w\.]+\.[\w]+[\w\/\?\&\=\%]+\Z/
@@ -53,6 +57,6 @@ class Link < ActiveRecord::Base
 
   def to_s
     return title unless title.nil? || title.empty?
-    return url
+    return hostname
   end
 end
