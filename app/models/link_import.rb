@@ -7,8 +7,9 @@ class LinkImport
 
   validates :category, presence: true
   validates :subcategory, presence: true
-  validates :title, presence: true
   validates :url, presence: true
+
+  validate :validate_link
 
   attr_writer :create_categories
   def create_categories?
@@ -16,7 +17,7 @@ class LinkImport
   end
 
   def save
-    link.save!
+    link.save
   end
 
   def link
@@ -50,5 +51,12 @@ class LinkImport
     subcategory_relation = category.subcategories.where(name: subcategory_name)
 
     @subcategory = create_categories? ? subcategory_relation.first_or_create : subcategory_relation.first
+  end
+
+  def validate_link
+    unless link.valid?
+      errors.add(:link, 'is not valid')
+      link.errors.each { |e| errors.add(e[0], e[1]) }
+    end
   end
 end

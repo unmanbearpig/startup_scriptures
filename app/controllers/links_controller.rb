@@ -3,7 +3,7 @@ class LinksController < ApplicationController
 
   before_action :find_subcategory, only: %i(new create)
   before_action :find_link, only: %i(edit update destroy upvote downvote)
-  before_action :make_sure_admin_signed_in, only: %i(new create destroy edit update)
+  before_action :make_sure_admin_signed_in, only: %i(new create destroy edit update links_without_titles recent)
   before_action :make_sure_user_can_vote, only: %i(upvote downvote unvote)
 
   def search
@@ -76,6 +76,10 @@ class LinksController < ApplicationController
   def recent
     @links = Link.order(updated_at: :desc).take(50)
     render layout: 'with_header'
+  end
+
+  def links_without_titles
+    @links = Link.no_title.all
   end
 
   private

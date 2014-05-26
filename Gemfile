@@ -60,3 +60,7 @@ gem 'acts_as_votable'
 gem 'acts_as_list'
 gem 'gon'
 gem 'smarter_csv'
+
+# for title fetching
+gem 'nokogiri'
+gem 'typhoeus'

@@ -12,7 +12,7 @@ module ApplicationHelper
   end
 
   def subcategory_path subcategory
-    category_path(subcategory.category) + "#subcategory-#{subcategory.id}"
+    categories_path(subcategory.category) + "#subcategory-#{subcategory.id}"
   end
 
 end

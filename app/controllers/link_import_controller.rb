@@ -28,7 +28,11 @@ class LinkImportController < ApplicationController
     @csv_links = CsvLinkImport.new file_path: file.path
     @csv_links.create_categories = create_categories
     unless @csv_links.valid?
-      flash_messages_from_errors @csv_links.errors
+      if @csv_links.errors.count <= 10
+        flash_messages_from_errors @csv_links.errors
+      else
+        flash[:alert] = "Could not import #{@csv_links.errors.count} links"
+      end
       redirect_to :back
       return nil
     end

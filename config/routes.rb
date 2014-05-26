@@ -5,6 +5,17 @@ Rails.application.routes.draw do
 
   devise_for :users
 
+
+  get 'links/recent' => 'links#recent', as: :recent_links
+  get 'links/no_titles' => 'links#links_without_titles', as: :links_without_titles
+
+  get 'reading_list' => 'saved_links#index', as: :reading_list
+  post 'saved_link/:link_id' => 'saved_links#create', as: :save_link
+  delete 'saved_link/:link_id' => 'saved_links#delete', as: :delete_saved_link
+
+  get 'import_links' => 'link_import#new', as: :import_links_form
+  post 'import_links' => 'link_import#import', as: :import_links
+
   post 'categories/reorder' => 'categories#reorder', as: :reorder_categories
   resources :categories do
     post 'reorder_subcategories'
@@ -19,14 +30,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'recent' => 'links#recent', as: :recent_links
 
-  get 'reading_list' => 'saved_links#index', as: :reading_list
-  post 'saved_link/:link_id' => 'saved_links#create', as: :save_link
-  delete 'saved_link/:link_id' => 'saved_links#delete', as: :delete_saved_link
-
-  get 'import_links' => 'link_import#new', as: :import_links_form
-  post 'import_links' => 'link_import#import', as: :import_links
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

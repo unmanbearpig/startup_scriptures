@@ -1,7 +1,7 @@
 class Category < ActiveRecord::Base
   include BaseCategory
 
-  has_many :subcategories
+  has_many :subcategories, dependent: :destroy
   has_many :links, through: :subcategories
   has_many :user_category_positions
 
