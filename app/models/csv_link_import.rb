@@ -10,13 +10,19 @@ class CsvLinkImport
   def options
     @options ||= {
       remove_unmapped_keys: true,
+      downcase_header: true,
       key_mapping: {
         category: :category_name,
-        subcategory: :subcategory_name,
         category_name: :category_name,
+
+        subcategory: :subcategory_name,
         subcategory_name: :subcategory_name,
+
         title: :title,
+
+        link: :url,
         url: :url,
+
         tags: :tags
       }
     }
