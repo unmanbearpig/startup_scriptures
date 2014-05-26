@@ -3,6 +3,8 @@ class LinkImportController < ApplicationController
 
   before_action :make_sure_admin_signed_in
 
+  MAX_FLASH_ERRORS = 10
+
   def new
   end
 
@@ -28,11 +30,10 @@ class LinkImportController < ApplicationController
     @csv_links = CsvLinkImport.new file_path: file.path
     @csv_links.create_categories = create_categories
     unless @csv_links.valid?
-      if @csv_links.errors.count <= 10
-        flash_messages_from_errors @csv_links.errors
-      else
-        flash[:alert] = "Could not import #{@csv_links.errors.count} links"
-      end
+      flash[:alert] = []
+      flash[:alert] << "Could not import #{@csv_links.errors.count} links, only first #{MAX_FLASH_ERRORS} errors shown" if @csv_links.errors.count > MAX_FLASH_ERRORS
+      flash[:alert] += @csv_links.errors.full_messages.first(10)
+
       redirect_to :back
       return nil
     end
