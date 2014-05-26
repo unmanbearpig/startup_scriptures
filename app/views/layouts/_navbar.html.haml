@@ -9,7 +9,6 @@
       .header-wrapper
         #main-navbar-collapse
           %ul.nav.navbar-nav.navbar-right.navbar.header-buttons
-            = render 'layouts/search_field'
             - if user_signed_in?
               %li
                 %a{href: root_path} My Dashboard

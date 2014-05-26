@@ -1,4 +1,5 @@
-%ul.nav.nav-tabs
+%ul.categories-tabs.nav.nav-tabs.col-md-8.col-sm-12
+
   - categories.each do |category|
     -#   <ul class="nav nav-tabs">
     -#   <li class="active"><a href="#">Home</a></li>
@@ -11,3 +12,6 @@
     %li
       %a{href: new_category_path}
         %strong New
+.clearfix.visible-xs
+%ul.nav.nav-tabs.search-bar.col-md-4.col-sm-12
+  = render 'layouts/search_field'

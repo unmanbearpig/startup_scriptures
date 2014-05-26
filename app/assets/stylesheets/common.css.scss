@@ -41,3 +41,16 @@ $header-padding-top: $header-navbar-height - $header-buttons-height;
 .log-in-dropdown.open > a {
     background-color: transparent !important;
 }
+
+.categories-tabs {
+    height: 51px;
+    padding-top: 9px;
+}
+
+.header-bar {
+    margin-bottom: 0px !important;
+}
+
+.search-bar {
+    margin-bottom: 8px !important;
+}
