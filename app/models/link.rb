@@ -8,6 +8,8 @@ class Link < ActiveRecord::Base
 
   belongs_to :subcategory
 
+  before_validation :fix_url
+
   after_save :fetch_title_and_save!
 
   scope :no_title, -> { where("title is null or title = ''") }
@@ -17,6 +19,15 @@ class Link < ActiveRecord::Base
 
   def category
     subcategory.category
+  end
+
+  def fix_url
+    unless url =~ /:\/\// # no protocol
+      if url =~ /\A[\w\.]+\.[\w]+[\w\/\?\&\=\%]+\Z/
+        # ^ seems like a valid url with protocol missing
+        self.url = 'http://' + url # add protocol
+      end
+    end
   end
 
   def validate_url_format
