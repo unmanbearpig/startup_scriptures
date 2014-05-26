@@ -46,8 +46,6 @@ class LinkImport
     return nil unless category
     return @subcategory if defined?(@subcategory)
 
-    puts '#subcategory'
-
     subcategory_relation = category.subcategories.where(name: subcategory_name)
 
     @subcategory = create_categories? ? subcategory_relation.first_or_create : subcategory_relation.first
