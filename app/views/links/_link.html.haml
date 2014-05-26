@@ -1,4 +1,7 @@
 %span
   %a{href: link.url}= link
   = edit_link_button(link)
-  = render partial: 'links/link_buttons', locals: { link: link }
+  %span.link-buttons
+    = render partial: 'links/votes', locals: { link: link }
+  - if !defined?(show_buttons) || show_buttons == true
+    = render partial: 'links/link_buttons', locals: { link: link }
