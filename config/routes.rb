@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   admin_constraint = ->(request) { request.env['warden'].authenticate? && request.env['warden'].user.is_admin }
   constraints admin_constraint do
-    mount Sidekiq::Web, at: '/sidekiq'
+    mount Sidekiq::Web, at: '/sidekiq', as: :background_tasks_dashboard
   end
   get 'links/recent' => 'links#recent', as: :recent_links
   get 'links/no_titles' => 'links#links_without_titles', as: :links_without_titles
