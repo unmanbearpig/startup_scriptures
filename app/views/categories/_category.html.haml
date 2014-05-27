@@ -9,4 +9,4 @@
         %ul.links-list
           - category.links.order(created_at: :desc).first(5).each do |link|
             %li
-              = render partial: 'links/link', locals: {link: link, show_buttons: false}
+              = render partial: 'links/link', locals: {link: link, show_buttons: false, truncate_title: 70}
