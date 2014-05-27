@@ -7,6 +7,6 @@
         %h3.category-title= category.name
       %p
         %ul.links-list
-          - category.links.each do |link|
+          - category.links.first(5).each do |link|
             %li
               = render partial: 'links/link', locals: {link: link, show_buttons: false}
