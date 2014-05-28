@@ -4,12 +4,13 @@ class PromoAnnouncement < ActiveRecord::Base
   validates :link, presence: true
   validates :published_at, presence: true, if: -> { is_visible }
 
-  scope :latest, -> { where('published_at is not null').order(published_at: :desc).first }
+  scope :latest, -> { where('published_at is not null').order(published_at: :desc) }
 
   before_validation :update_published_at
 
   def self.active
-    latest.visible? ? latest : nil
+    return nil if latest.nil? || latest.empty?
+    latest.first.visible? ? latest.first : nil
   end
 
   def visible?
