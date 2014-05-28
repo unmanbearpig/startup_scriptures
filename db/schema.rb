@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140517181819) do
+ActiveRecord::Schema.define(version: 20140528162620) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,17 @@ ActiveRecord::Schema.define(version: 20140517181819) do
   end
 
   add_index "links", ["subcategory_id"], name: "index_links_on_subcategory_id", using: :btree
+
+  create_table "promo_announcements", force: true do |t|
+    t.integer  "link_id"
+    t.string   "message"
+    t.boolean  "is_visible"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "published_at"
+  end
+
+  add_index "promo_announcements", ["link_id"], name: "index_promo_announcements_on_link_id", using: :btree
 
   create_table "saved_links", force: true do |t|
     t.integer  "user_id"

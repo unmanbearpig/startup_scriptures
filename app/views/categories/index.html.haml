@@ -1,3 +1,9 @@
+- if @promo_announcement
+  .jumbotron
+    %h2.announcement-header= @promo_announcement.message
+    %p
+      = render partial: 'links/link', locals: { link: @promo_announcement.link, show_buttons: false }
+
 - if admin_signed_in?
   .row
     .col-md-3

@@ -8,6 +8,9 @@ class Link < ActiveRecord::Base
 
   belongs_to :subcategory
 
+  has_one :promo_announcement
+  accepts_nested_attributes_for :promo_announcement, reject_if: ->(attributes) { !attributes[:is_visible] && attributes[:message].empty? }
+
   before_validation :fix_url
 
   after_save :async_fetch_title_and_save

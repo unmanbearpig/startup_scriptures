@@ -13,5 +13,14 @@
     = f.label 'Tags (separated by commas)', for: 'tag_list'
     = f.text_field :tag_list, id: 'tag_list'
 
+  = f.fields_for :promo_announcement, @promo_announcement do |promo_form|
+    .form-group
+      = promo_form.check_box :is_visible
+      Show promo announcement
+
+    .form-group
+      = promo_form.label 'Promo message', for: 'message'
+      = promo_form.text_field :message, id: 'message'
+
   %button.btn.btn-default{type: 'submit'}
     = button_text

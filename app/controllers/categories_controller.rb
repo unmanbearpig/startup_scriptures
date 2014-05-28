@@ -5,6 +5,8 @@ class CategoriesController < ApplicationController
   before_action :make_sure_user_signed_in, only: %i(reorder reorder_subcategories)
   before_action :find_category, except: %i(index new create reorder)
 
+  before_action :find_promo_announcement, only: %i(index)
+
   def index
     gon.push({reorder_categories_path: reorder_categories_path})
   end
@@ -95,4 +97,7 @@ class CategoriesController < ApplicationController
     end
   end
 
+  def find_promo_announcement
+    @promo_announcement = PromoAnnouncement.active
+  end
 end

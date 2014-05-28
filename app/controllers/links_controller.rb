@@ -47,10 +47,12 @@ class LinksController < ApplicationController
   end
 
   def edit
+    @promo_announcement = @link.promo_announcement ? @link.promo_announcement : PromoAnnouncement.new
   end
 
   def update
     @link.update(link_params)
+
     if @link.valid?
       flash[:notice] = "Link was updated successfully"
       redirect_to @link.category
@@ -101,7 +103,7 @@ class LinksController < ApplicationController
   end
 
   def link_params
-    params.require(:link).permit(:url, :title, :tag_list)
+    params.require(:link).permit(:url, :title, :tag_list, promo_announcement_attributes: %i(id is_visible message))
   end
 
   def make_sure_user_can_vote
