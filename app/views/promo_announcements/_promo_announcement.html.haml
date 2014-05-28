@@ -1,0 +1,7 @@
+- if promo_announcement
+  .jumbotron
+    %h2.announcement-header
+      = promo_announcement.message
+      %span.label.label-primary New
+    %p
+      = render partial: 'links/link', locals: { link: promo_announcement.link, show_buttons: false }
