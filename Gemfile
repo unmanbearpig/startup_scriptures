@@ -50,6 +50,8 @@ group :development, :test do
   gem 'rspec-rails'
 end
 
+gem "letter_opener", :group => :development
+
 gem 'bootstrap-sass'
 gem 'haml'
 gem 'jquery-ui-rails'
