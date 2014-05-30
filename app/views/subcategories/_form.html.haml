@@ -1,5 +1,5 @@
 = set_title title
-= form_for [category, subcategory], html: { role: 'form'} do |f|
+= form_for @subcategory, html: { role: 'form'} do |f|
   .form-group
     = f.label :name, for: 'name'
     = f.text_field :name, id: 'name'

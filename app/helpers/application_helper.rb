@@ -10,9 +10,4 @@ module ApplicationHelper
       content_tag(:h1, title)
     end
   end
-
-  def subcategory_path subcategory
-    categories_path(subcategory.category) + "#subcategory-#{subcategory.id}"
-  end
-
 end
