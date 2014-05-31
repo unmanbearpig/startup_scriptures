@@ -48,6 +48,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-plus'
   gem 'rspec-rails'
+  gem 'capybara'
 end
 
 gem "letter_opener", :group => :development
