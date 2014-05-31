@@ -1,8 +1,5 @@
 = set_title title
-= form_for @subcategory, html: { role: 'form'} do |f|
-  .form-group
-    = f.label :name, for: 'name'
+.col-md-6
+  = bootstrap_form_for @subcategory, html: { role: 'form'} do |f|
     = f.text_field :name, id: 'name'
-
-  %button.btn.btn-default{type: 'submit'}
-    = button_text
+    = f.submit button_text

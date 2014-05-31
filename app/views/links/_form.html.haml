@@ -1,26 +1,13 @@
 = set_title title
 - form_for_record = defined?(subcategory) ? [subcategory, link] : link
-= form_for form_for_record, html: { role: 'form'} do |f|
-  .form-group
-    = f.label :title, for: 'title'
+.col-md-6
+  = bootstrap_form_for form_for_record, html: { role: 'form'} do |f|
     = f.text_field :title, id: 'title'
-
-  .form-group
-    = f.label :url, for: 'url'
     = f.text_field :url, id: 'url'
-
-  .form-group
-    = f.label 'Tags (separated by commas)', for: 'tag_list'
     = f.text_field :tag_list, id: 'tag_list'
 
-  = f.fields_for :promo_announcement, @link.promo_announcement do |promo_form|
-    .form-group
-      = promo_form.check_box :is_visible
-      Show promo announcement
-
-    .form-group
-      = promo_form.label 'Promo message', for: 'message'
+    = f.fields_for :promo_announcement, @link.promo_announcement do |promo_form|
+      = promo_form.check_box :is_visible, label: 'Show promo announcement'
       = promo_form.text_field :message, id: 'message'
 
-  %button.btn.btn-default{type: 'submit'}
-    = button_text
+    = f.submit button_text

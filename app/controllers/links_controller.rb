@@ -51,7 +51,7 @@ class LinksController < ApplicationController
   end
 
   def edit
-    @link.build_promo_announcement
+    @link.build_promo_announcement unless @link.promo_announcement
   end
 
   def update
