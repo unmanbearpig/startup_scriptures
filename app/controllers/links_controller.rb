@@ -22,6 +22,7 @@ class LinksController < ApplicationController
 
   def new
     @link = @subcategory.links.new
+    @promo_announcement = PromoAnnouncement.new(link: @link)
   end
 
   def create
@@ -103,7 +104,7 @@ class LinksController < ApplicationController
   end
 
   def link_params
-    params.require(:link).permit(:url, :title, :tag_list, promo_announcement_attributes: %i(id is_visible message))
+    params.require(:link).permit(:url, :title, :tag_list, promo_announcement_attributes: %i(id link_id is_visible message))
   end
 
   def make_sure_user_can_vote
