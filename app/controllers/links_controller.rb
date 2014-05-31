@@ -22,11 +22,14 @@ class LinksController < ApplicationController
 
   def new
     @link = @subcategory.links.new
-    @promo_announcement = PromoAnnouncement.new(link: @link)
+    @link.build_promo_announcement
   end
 
   def create
-    @link = @subcategory.links.create link_params
+    # we can't create it with promo announcement in one step because
+    # promo_announcement has to have a link_id which is not created yet
+    @link = @subcategory.links.create link_params.except('promo_announcement_attributes')
+    @link.update link_params
 
     if @link.valid?
       flash[:notice] = "Link was created"
@@ -48,7 +51,7 @@ class LinksController < ApplicationController
   end
 
   def edit
-    @promo_announcement = @link.promo_announcement ? @link.promo_announcement : PromoAnnouncement.new
+    @link.build_promo_announcement
   end
 
   def update
