@@ -1,5 +1,5 @@
 %span
-  %a{href: link.url}= (defined?(truncate_title) && truncate_title) ? truncate(link.to_s, length: truncate_title) : link
+  %a{href: link.url, target: '_blank'}= (defined?(truncate_title) && truncate_title) ? truncate(link.to_s, length: truncate_title) : link
   = edit_link_button(link)
   %span.link-buttons
     = render partial: 'links/votes', locals: { link: link }
