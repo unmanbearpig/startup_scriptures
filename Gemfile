@@ -40,6 +40,7 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+# for heroku
 gem 'rails_12factor', group: :production
 
 group :development, :test do
@@ -53,15 +54,20 @@ end
 
 gem "letter_opener", :group => :development
 
-gem 'bootstrap-sass'
-gem 'haml'
-gem 'jquery-ui-rails'
-gem 'jquery-turbolinks'
 gem 'devise'
 gem 'acts-as-taggable-on'
 gem 'acts_as_votable'
 gem 'acts_as_list'
+
+# front end
+gem 'bootstrap-sass'
+gem 'bootstrap_form'
+gem 'haml'
+gem 'jquery-ui-rails'
+gem 'jquery-turbolinks'
 gem 'gon'
+
+# Import
 gem 'smarter_csv'
 
 # for title fetching
