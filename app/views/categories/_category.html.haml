@@ -9,4 +9,4 @@
         %ul.links-list
           - category.links.order(created_at: :desc).first(5).each do |link|
             %li
-              = render_link link
+              = render_link link, buttons: false
