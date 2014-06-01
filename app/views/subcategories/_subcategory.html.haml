@@ -6,7 +6,6 @@
       %h3.category-title
         = subcategory.name
         = edit_subcategory_dropdown(subcategory)
-      %ul
+      .list-group.link-list.clearfix
         - subcategory.links.each do |link|
-          %li
-            = render link
+          = render_link link, type: :medium

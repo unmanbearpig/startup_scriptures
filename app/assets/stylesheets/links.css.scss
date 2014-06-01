@@ -1,3 +1,55 @@
 // Place all the styles related to the links controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.link-list .list-group-item {
+    border-color: transparent !important;
+}
+
+.link-tags {
+    color: #999;
+}
+
+.vote_buttons {
+    float: left;
+    margin-top: 8px;
+    margin-left: 16px;
+}
+
+.link-votes {
+    color: #555;
+    text-align: center;
+}
+
+.link-description {
+    margin-left: 14px;
+}
+
+.link-group-item {
+    @extend a.list-group-item;
+
+    padding-left: 0px !important;
+    padding-top: 2px !important;
+    display: inline-block;
+    max-width: 84%;
+}
+
+.link-group-item-header {
+
+}
+
+.link-group-item-header:hover {
+    text-decoration: none !important;
+}
+
+.link-star {
+    text-decoration: none !important;
+}
+
+.clear-left {
+    clear: left;
+}
+
+.link-list-item:hover {
+    @extend a.list-group-item:hover
+}

@@ -9,7 +9,7 @@
     - unless links.nil?
       - links.each do |link|
         %tr
-          %td= render link
+          %td= render_link link
           %td= link_to link.category, link.category
           %td= link_to link.subcategory, link.subcategory
           %td= time_ago_in_words(link.updated_at) + ' ago'

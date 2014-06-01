@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
 
   def delete_link link
     saved_link = saved_links.find_by(link: link)
-    saved_link.delete
+    saved_link.delete unless saved_link.nil?
   end
 
   def has_link? link

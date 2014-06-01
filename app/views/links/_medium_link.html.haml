@@ -1,0 +1,17 @@
+%div.clearfix.link-list-item
+  = render partial: 'links/big_vote_buttons', locals: { link: link }
+  .link-description.link-group-item
+    %h4
+      = render partial: 'links/reading_list_button', locals: { link: link }
+      %a.link-group-item-header{href: link.url, target: '_blank'}
+        = link.truncated_title(truncate_title)
+        - if author
+          %small= "by #{link.author}" if link.author
+    = edit_link_button(link)
+    %p
+      - if category
+        %strong
+          .link-category= "#{link.category}/#{link.subcategory}"
+      .link-tags= link.tag_list.first(10).join(', ')
+
+  .clear-left

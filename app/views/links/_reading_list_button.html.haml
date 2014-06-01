@@ -1,7 +1,7 @@
 - if user_signed_in?
   - if current_user.has_link?(link)
-    = link_to delete_saved_link_path(link), method: :delete do
-      %span.glyphicon.glyphicon-star
+    = link_to delete_saved_link_path(link), method: :delete, class: 'link-star' do
+      = glyphicon 'star'
   - else
-    = link_to save_link_path(link), method: :post do
-      %span.glyphicon.glyphicon-star-empty
+    = link_to save_link_path(link), method: :post, class: 'link-star-empty' do
+      = glyphicon 'star-empty'

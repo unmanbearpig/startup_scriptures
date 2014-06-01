@@ -16,3 +16,9 @@ $(document).ready () ->
       reorderCategories(categoriesOrder)
   })
   $( handle_selector ).disableSelection()
+
+  $('.link-star').on 'ajax:success', (e, data, status, xhr) ->
+    console.log('on star')
+
+  $('link-star-empty').on 'ajax:success', (e, data, status, xhr) ->
+    console.log('on empty star')
