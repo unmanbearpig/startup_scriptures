@@ -23,7 +23,8 @@ class CsvLinkImport
         link: :url,
         url: :url,
 
-        tags: :tags
+        tags: :tags,
+        author: :author
       }
     }
   end

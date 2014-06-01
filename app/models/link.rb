@@ -54,6 +54,11 @@ class Link < ActiveRecord::Base
     return hostname
   end
 
+  def truncated_title how_much
+    return to_s unless how_much
+    to_s.truncate how_much
+  end
+
   def self.fetch_missing_titles
     ids_to_fetch = no_title.pluck(:id)
     ids_to_fetch.each { |id| TitleFetcherWorker.perform_async(id) }

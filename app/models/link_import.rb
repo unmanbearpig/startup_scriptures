@@ -2,7 +2,7 @@ class LinkImport
   include ActiveModel::Model
   include ActiveModel::Validations::Callbacks
 
-  attr_accessor :category_name, :subcategory_name, :title, :url, :tags
+  attr_accessor :category_name, :subcategory_name, :title, :url, :tags, :author
   attr_reader :category, :subcategory
 
   validates :category, presence: true
@@ -26,6 +26,7 @@ class LinkImport
     @link ||= subcategory.links.where(url: url).first_or_initialize
     @link.tag_list = tags
     @link.title = title
+    @link.author = author
     @link
   end
 
