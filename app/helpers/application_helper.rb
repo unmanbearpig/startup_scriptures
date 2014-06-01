@@ -14,7 +14,6 @@ module ApplicationHelper
   def render_link link, options = {}
     default_options = {
       link: link,
-      truncate_title: 60,
       buttons: true,
       type: :small,
       category: false,
@@ -25,9 +24,9 @@ module ApplicationHelper
 
     case opts[:type]
     when :small
-      render partial: 'links/link', locals: opts
+      render partial: 'links/link', locals: {truncate_title: 60}.merge(opts)
     when :medium
-      render partial: 'links/medium_link', locals: opts
+      render partial: 'links/medium_link', locals: {truncate_title: 140}.merge(opts)
     else
       fail InvalidArgument, "Invalid link type #{opts[:type]}"
     end
