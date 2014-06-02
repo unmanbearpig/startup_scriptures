@@ -1,10 +1,6 @@
 module SubcategoriesHelper
   def subcategories(category)
-    @subcategories ||= if user_signed_in?
-                         current_user.ordered_subcategories(category)
-                       else
-                         category.subcategories
-                       end
+    @subcategories ||= category.ordered_subcategories
   end
 
   def edit_subcategory_dropdown(subcategory)

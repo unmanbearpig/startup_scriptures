@@ -1,6 +1,6 @@
 .subcategory-list-item{'data-subcategory-id' => subcategory.id, id: "subcategory-#{subcategory.id}"}
   .thumbnail
-    - if user_signed_in?
+    - if admin_signed_in?
       .subcategory-handle
     .caption
       %h3.category-title

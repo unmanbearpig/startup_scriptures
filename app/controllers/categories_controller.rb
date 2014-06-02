@@ -59,7 +59,7 @@ class CategoriesController < ApplicationController
           .map(&:to_i)
           .map { |id| Category.find(id) }
 
-        render :json => { success: current_user.set_category_order(categories_array) }
+        render :json => { success: Category.set_order(categories_array) }
       end
     end
   end
@@ -74,7 +74,7 @@ class CategoriesController < ApplicationController
           .map(&:to_i)
           .map { |id| @category.subcategories.find(id) }
 
-        render :json => { success: current_user.set_subcategory_order(@category, subcategories_array) }
+        render :json => { success: @category.set_subcategory_order(subcategories_array) }
       end
     end
   end
