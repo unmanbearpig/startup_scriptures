@@ -2,6 +2,6 @@
   .vote_buttons
     = link_to upvote_link_path(link), method: :post do
       = glyphicon 'arrow-up'
-    .link-votes= link.weighted_score
+    .link-votes= link.score
     = link_to downvote_link_path(link), method: :post do
       = glyphicon 'arrow-down'

@@ -17,6 +17,8 @@ class Link < ActiveRecord::Base
 
   scope :no_title, -> { where("title is null or title = ''") }
 
+  default_scope -> { order(score: :desc) }
+
   acts_as_taggable
   acts_as_votable
 
@@ -63,5 +65,20 @@ class Link < ActiveRecord::Base
     ids_to_fetch = no_title.pluck(:id)
     ids_to_fetch.each { |id| TitleFetcherWorker.perform_async(id) }
     return ids_to_fetch.count
+  end
+
+  def upvote_by user
+    vote_up user
+    update_score
+  end
+
+  def downvote_by user
+    vote_down user
+    update_score
+  end
+
+  def update_score
+    self.score = weighted_score
+    save
   end
 end
