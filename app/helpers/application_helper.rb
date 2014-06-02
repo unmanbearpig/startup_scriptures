@@ -22,7 +22,8 @@ module ApplicationHelper
       buttons: true,
       type: :small,
       category: false,
-      author: true
+      author: true,
+      tags: true
     }
 
     opts = default_options.merge(options) { |key, old_val, new_val| new_val }

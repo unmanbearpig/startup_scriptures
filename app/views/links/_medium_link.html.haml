@@ -11,6 +11,7 @@
     - if category
       %strong
         = render partial: 'links/link_category', locals: { link: link }
+    - if tags
       .link-tags= link.tag_list.empty? ? 'No tags' : link.tag_list.first(10).join(', ')
 
   .clear-left

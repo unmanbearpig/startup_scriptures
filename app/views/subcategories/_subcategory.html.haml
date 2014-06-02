@@ -4,8 +4,11 @@
       .subcategory-handle
     .caption
       %h3.category-title
-        = subcategory.name
+        = link_to subcategory.name, subcategory, class: 'subcategory-title'
         = edit_subcategory_dropdown(subcategory)
       .list-group.link-list.clearfix
         - subcategory.links.each do |link|
-          = render_link link, type: :medium
+          - if defined?(detailed) && detailed
+            = render_link link, type: :medium, buttons: true, category: true
+          - else
+            = render_link link, type: :medium, buttons: true
