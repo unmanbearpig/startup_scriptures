@@ -3,7 +3,7 @@
 - if @links.empty?
   Your reading list is empty
 - else
-  .reading-list.col-lg-5.col-md-6.col-sm-8.col-xs-12
+  .reading-list.col-md-10
     - @links.each do |link|
       .link.reading-list-item
         = render_link link, type: :medium
