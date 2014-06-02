@@ -1,8 +1,2 @@
 - @links.each do |link|
-  %h3
-    %a{href: link.url}= link.title
-  .link-description
-    %div
-      = link.category.name
-    %div
-      = link.subcategory.name
+  = render_link link, type: :medium, buttons: false, category: true

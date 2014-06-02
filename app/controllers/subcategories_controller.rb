@@ -2,8 +2,8 @@ class SubcategoriesController < ApplicationController
   layout 'with_categories_header'
 
   before_action :find_category, only: %i(new create)
-  before_action :find_subcategory, only: %i(destroy edit update)
-  before_action :make_sure_admin_signed_in
+  before_action :find_subcategory, only: %i(show destroy edit update)
+  before_action :make_sure_admin_signed_in, except: %i(show)
 
   def new
     @subcategory = @category.subcategories.new

@@ -25,7 +25,7 @@ module ApplicationHelper
       author: true
     }
 
-    opts = default_options.merge(options)
+    opts = default_options.merge(options) { |key, old_val, new_val| new_val }
 
     case opts[:type]
     when :small
