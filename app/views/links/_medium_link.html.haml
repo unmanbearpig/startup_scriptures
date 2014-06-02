@@ -1,17 +1,16 @@
 %div.clearfix.link-list-item
   = render partial: 'links/big_vote_buttons', locals: { link: link }
   .link-description.link-group-item
-    %h4
+    %h4.link-title
       = render partial: 'links/reading_list_button', locals: { link: link }
       %a.link-group-item-header{href: link.url, target: '_blank'}
         = link.truncated_title(truncate_title)
         - if author
           %small= "by #{link.author}" if link.author
     = edit_link_button(link)
-    %p
-      - if category
-        %strong
-          = render partial: 'links/link_category', locals: { link: link }
+    - if category
+      %strong
+        = render partial: 'links/link_category', locals: { link: link }
       .link-tags= link.tag_list.empty? ? 'No tags' : link.tag_list.first(10).join(', ')
 
   .clear-left

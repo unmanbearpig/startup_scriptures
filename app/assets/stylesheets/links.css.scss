@@ -23,6 +23,7 @@
 
 .link-description {
     margin-left: 14px;
+    padding-bottom: 20px;
 }
 
 .link-group-item {
@@ -52,4 +53,13 @@
 
 .link-list-item:hover {
     @extend a.list-group-item:hover
+}
+
+.link-category {
+    color: #7F7F7F !important;
+}
+
+.link-title {
+    margin-bottom: 3px !important;
+
 }
