@@ -12,6 +12,11 @@ module ApplicationHelper
   end
 
   def render_link link, options = {}
+    unless link
+      Rails.logger.warn('render_link got empty link')
+      return
+    end
+
     default_options = {
       link: link,
       buttons: true,
