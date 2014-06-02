@@ -6,4 +6,4 @@
   .reading-list.col-lg-5.col-md-6.col-sm-8.col-xs-12
     - @links.each do |link|
       .link.reading-list-item
-        = render_link link
+        = render_link link, type: :medium
