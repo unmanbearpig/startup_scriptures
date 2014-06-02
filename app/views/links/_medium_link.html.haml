@@ -12,6 +12,6 @@
       - if category
         %strong
           .link-category= "#{link.category}/#{link.subcategory}"
-      .link-tags= link.tag_list.first(10).join(', ')
+      .link-tags= link.tag_list.empty? ? 'No tags' : link.tag_list.first(10).join(', ')
 
   .clear-left
