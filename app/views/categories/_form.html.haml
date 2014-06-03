@@ -2,4 +2,5 @@
 .col-md-6
   = bootstrap_form_for category, html: { role: 'form'} do |f|
     = f.text_field :name, id: 'name'
+    = f.check_box :hidden
     = f.submit button_text

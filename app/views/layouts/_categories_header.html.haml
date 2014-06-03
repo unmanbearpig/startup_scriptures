@@ -1,13 +1,8 @@
 %ul.categories-tabs.nav.nav-tabs.col-md-8.col-sm-12
 
   - categories.each do |category|
-    -#   <ul class="nav nav-tabs">
-    -#   <li class="active"><a href="#">Home</a></li>
-    -#   <li><a href="#">Profile</a></li>
-    -#   <li><a href="#">Messages</a></li>
-    -# </ul>
     %li{class: ('active' if current_category?(category))}
-      = link_to category.name, category
+      = link_to category.name, category, class: (category.hidden ? 'hidden-category' : '')
   - if admin_signed_in?
     %li
       %a{href: new_category_path}

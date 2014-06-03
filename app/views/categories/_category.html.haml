@@ -3,7 +3,7 @@
     .category-handle
   .thumbnail
     .caption
-      = link_to category do
+      = link_to category, class: (category.hidden ? 'hidden-category' : '') do
         %h3.category-title= category.name
       %p
         %ul.links-list

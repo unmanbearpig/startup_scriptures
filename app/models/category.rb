@@ -8,6 +8,8 @@ class Category < ActiveRecord::Base
 
   validates :name, uniqueness: true
 
+  scope :displayed, -> { where("hidden is null or hidden != 't'") }
+
   def self.ordered order = :asc
     fail InvalidArgument.new('Invalid order') unless %i(asc desc).include?(order)
 
