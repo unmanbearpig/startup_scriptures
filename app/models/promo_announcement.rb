@@ -3,6 +3,7 @@ class PromoAnnouncement < ActiveRecord::Base
 
   validates :link, presence: true
   validates :published_at, presence: true, if: -> { is_visible }
+  validates :message, presence:true, allow_blank: false
 
   scope :latest, -> { where('published_at is not null').order(published_at: :desc) }
 
