@@ -1,5 +1,5 @@
 = set_title title
 .col-md-6
-  = bootstrap_form_for @subcategory, html: { role: 'form'} do |f|
+  = bootstrap_form_for [@subcategory.category, @subcategory], html: { role: 'form'} do |f|
     = f.text_field :name, id: 'name'
     = f.submit button_text
