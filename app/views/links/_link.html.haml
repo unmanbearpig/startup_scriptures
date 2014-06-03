@@ -1,7 +1,8 @@
 %span
   %a{href: link.url, target: '_blank'}= link.truncated_title(truncate_title)
-  - if buttons
+  - if buttons || edit_button
     = edit_link_button(link)
+  - if buttons || vote_buttons
     %span.link-buttons
       = render partial: 'links/votes', locals: { link: link }
       = render partial: 'links/link_buttons', locals: { link: link }

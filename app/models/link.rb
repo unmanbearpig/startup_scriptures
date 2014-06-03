@@ -2,13 +2,15 @@ require 'title_fetcher'
 
 class Link < ActiveRecord::Base
   validates :url, presence: true, allow_blank: false
+  validates :url, uniqueness: { scope: %i(subcategory_id) }
+
   validates :subcategory_id, presence: true
 
   validate :validate_url_format
 
   belongs_to :subcategory
 
-  has_one :promo_announcement
+  has_one :promo_announcement, dependent: :destroy
   accepts_nested_attributes_for :promo_announcement, reject_if: ->(attributes) { !attributes[:is_visible] && attributes[:message].empty? }
 
   before_validation :fix_url

@@ -10,7 +10,9 @@ class PromoAnnouncement < ActiveRecord::Base
 
   def self.active
     return nil if latest.nil? || latest.empty?
-    latest.first.visible? ? latest.first : nil
+    promo_announcement = latest.first
+    return nil unless promo_announcement.link
+    promo_announcement.visible? ? promo_announcement : nil
   end
 
   def visible?

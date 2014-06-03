@@ -20,6 +20,8 @@ module ApplicationHelper
     default_options = {
       link: link,
       buttons: true,
+      edit_button: false,
+      vote_buttons: false,
       type: :small,
       category: false,
       author: true,
