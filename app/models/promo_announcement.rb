@@ -7,22 +7,23 @@ class PromoAnnouncement < ActiveRecord::Base
 
   scope :latest, -> { where('published_at is not null').order(published_at: :desc) }
 
-  before_validation :update_published_at
+  after_save :update_published_at
 
   def self.active
-    return nil if latest.nil? || latest.empty?
-    promo_announcement = latest.first
-    return nil unless promo_announcement.link
-    promo_announcement.visible? ? promo_announcement : nil
+    return nil unless promo = latest.first
+    promo.visible? ? promo : nil
   end
 
   def visible?
     is_visible
   end
 
-  private
+  def is_visible
+    self == self.class.latest.first && read_attribute(:is_visible)
+  end
+
 
   def update_published_at
-    self.published_at = DateTime.now if is_visible
+    self.update(published_at: DateTime.now) if read_attribute(:is_visible) && !visible?
   end
 end
