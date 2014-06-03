@@ -83,4 +83,11 @@ class Link < ActiveRecord::Base
     self.score = weighted_score
     save
   end
+
+  def score
+    value = read_attribute(:score)
+    return value if value
+    update_score
+    read_attribute(:score)
+  end
 end
