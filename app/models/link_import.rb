@@ -23,7 +23,7 @@ class LinkImport
   def link
     return nil unless subcategory
 
-    @link ||= subcategory.links.where(url: url).first_or_initialize
+    @link ||= subcategory.links.where(url: Link.fix_url(url)).first_or_initialize
     @link.tag_list = tags
     @link.title = title
     @link.author = author

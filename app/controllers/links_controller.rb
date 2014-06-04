@@ -107,7 +107,7 @@ class LinksController < ApplicationController
   end
 
   def link_params
-    params.require(:link).permit(:url, :title, :tag_list, promo_announcement_attributes: %i(id link_id is_visible message))
+    params.require(:link).permit(:url, :title, :tag_list, :author, promo_announcement_attributes: %i(id link_id is_visible message))
   end
 
   def make_sure_user_can_vote

@@ -33,12 +33,7 @@ class Link < ActiveRecord::Base
   end
 
   def fix_url
-    unless url =~ /:\/\// # no protocol
-      if url =~ /\A[\w\.]+\.[\w]+[\w\/\?\&\=\%]+\Z/
-        # ^ seems like a valid url with protocol missing
-        self.url = 'http://' + url # add protocol
-      end
-    end
+    self.url = self.class.fix_url url
   end
 
   def validate_url_format
@@ -89,5 +84,18 @@ class Link < ActiveRecord::Base
     return value if value
     update_score
     read_attribute(:score)
+  end
+
+  def self.fix_url url
+    if url =~ /:\/\// # no protocol
+      return url
+    else
+      if url =~ /\A[\w\.]+\.[\w]+[\w\/\?\&\=\%]+\Z/
+        # ^ seems like a valid url with protocol missing
+        return 'http://' + url # add protocol
+      else
+        url
+      end
+    end
   end
 end
