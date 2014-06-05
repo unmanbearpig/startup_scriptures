@@ -24,3 +24,16 @@ $(document).ready () ->
     console.log('on empty star')
 
   $('.categories-grid').equalizer({columns: ' .category-box'})
+
+  resizeCategoryBar = () ->
+    if $(window).width() > 750
+      $('.search-bar').width(275)
+      $('.categories-tabs').width($(window).width() - 306)
+    else
+      $('.search-bar').width($(window).width() - 20)
+      $('.categories-tabs').width($(window).width() - 20)
+
+  resizeCategoryBar()
+
+  $(window).resize () ->
+    resizeCategoryBar()

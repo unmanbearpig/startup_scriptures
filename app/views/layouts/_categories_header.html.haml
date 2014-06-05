@@ -1,4 +1,4 @@
-%ul.categories-tabs.nav.nav-tabs.col-md-8.col-sm-12
+%ul.categories-tabs.nav.nav-pills.col-md-8.col-sm-12
 
   - categories.each do |category|
     %li{class: ('active' if current_category?(category))}
@@ -8,6 +8,6 @@
       %a{href: new_category_path}
         %strong New
 .clearfix.visible-xs
-%ul.nav.nav-tabs.search-bar.col-md-4.col-sm-12
+%ul.nav.search-bar.col-md-4.col-sm-12
   = render 'layouts/search_field'
 .clearfix
