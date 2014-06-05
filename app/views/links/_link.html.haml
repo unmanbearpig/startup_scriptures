@@ -6,3 +6,6 @@
     %span.link-buttons
       = render partial: 'links/votes', locals: { link: link }
       = render partial: 'links/link_buttons', locals: { link: link }
+  - if buttons || share_button
+    %a.share-button{href: share_link_url(link), title: 'Share via email'}
+      = glyphicon 'share'

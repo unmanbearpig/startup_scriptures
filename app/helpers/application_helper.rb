@@ -22,6 +22,7 @@ module ApplicationHelper
       buttons: true,
       edit_button: false,
       vote_buttons: false,
+      share_button: true,
       type: :small,
       category: false,
       author: true,

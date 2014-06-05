@@ -1,5 +1,5 @@
 module LinksHelper
-  def edit_link_button(link)
+  def edit_link_button link
     if admin_signed_in?
       menu_items = [['Edit link', edit_link_path(link)],
                     ['Delete link', link_path(link), {
@@ -9,5 +9,9 @@ module LinksHelper
 
       menu_button 'Edit', :xs, menu_items
     end
+  end
+
+  def share_link_url link
+    "mailto:?subject=Check out this website!&body=#{link} - #{link.url}"
   end
 end
