@@ -22,3 +22,5 @@ $(document).ready () ->
 
   $('link-star-empty').on 'ajax:success', (e, data, status, xhr) ->
     console.log('on empty star')
+
+  $('.categories-grid').equalizer({columns: ' .category-box'})

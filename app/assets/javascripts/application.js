@@ -15,5 +15,6 @@
 //= require jquery.turbolinks
 //= require bootstrap
 //= require jquery.ui.all
+//= require jquery.equalizer
 //= require_tree .
 //= require turbolinks

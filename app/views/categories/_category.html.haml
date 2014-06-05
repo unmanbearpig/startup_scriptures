@@ -1,7 +1,7 @@
 .col-lg-4.col-md-4.col-sm-6.col-xs-12.category-grid-item{id: "category-#{category.id}", 'data-category-id' => category.id}
   - if admin_signed_in?
     .category-handle
-  .thumbnail
+  .thumbnail.category-box
     .caption
       = link_to category, class: (category.hidden ? 'hidden-category' : '') do
         %h3.category-title= category.name
