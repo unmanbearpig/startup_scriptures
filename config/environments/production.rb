@@ -1,5 +1,5 @@
 Rails.application.configure do
-  config.action_mailer.default_url_options = { host: 'startupscriptures.herokuapp.com' }
+  config.action_mailer.default_url_options = { host: 'startupscriptures.com' }
 
   ActionMailer::Base.smtp_settings = {
     :address        => "smtp.sendgrid.net",
