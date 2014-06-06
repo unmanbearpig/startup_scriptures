@@ -6,7 +6,7 @@
       %a.link-group-item-header{href: link.url, target: '_blank'}
         = link.truncated_title(truncate_title)
         - if author
-          %small= "by #{link.author}" if link.author
+          %small= "#{link.author}" if link.author
     = edit_link_button(link)
     - if category
       %strong
