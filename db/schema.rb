@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140603171220) do
+ActiveRecord::Schema.define(version: 20140607001707) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,8 @@ ActiveRecord::Schema.define(version: 20140603171220) do
     t.integer  "subcategory_id"
     t.string   "author"
     t.integer  "score"
+    t.boolean  "hidden"
+    t.text     "description"
   end
 
   add_index "links", ["subcategory_id"], name: "index_links_on_subcategory_id", using: :btree
@@ -77,18 +79,10 @@ ActiveRecord::Schema.define(version: 20140603171220) do
     t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "hidden"
   end
 
   add_index "subcategories", ["category_id"], name: "index_subcategories_on_category_id", using: :btree
-
-  create_table "subcategory_positions", force: true do |t|
-    t.integer "category_id"
-    t.integer "subcategory_id"
-    t.integer "position"
-  end
-
-  add_index "subcategory_positions", ["category_id"], name: "index_subcategory_positions_on_category_id", using: :btree
-  add_index "subcategory_positions", ["subcategory_id"], name: "index_subcategory_positions_on_subcategory_id", using: :btree
 
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"

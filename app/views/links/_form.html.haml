@@ -6,6 +6,7 @@
     = f.text_field :url, id: 'url'
     = f.text_field :tag_list, id: 'tag_list'
     = f.text_field :author
+    = f.text_area  :description
 
     = f.fields_for :promo_announcement, @link.promo_announcement do |promo_form|
       = promo_form.check_box :is_visible, label: 'Show home page announcement'
