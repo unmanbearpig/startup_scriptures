@@ -17,3 +17,5 @@
 
     - if content_for? :after_content
       = yield :after_content
+    - if Rails.env.production?
+      = render partial: 'layouts/analytics'
