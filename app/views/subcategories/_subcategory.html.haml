@@ -4,7 +4,9 @@
       .subcategory-handle
     .caption
       %h3.category-title
-        = link_to subcategory.name, subcategory, class: 'subcategory-title'
+        = link_to subcategory, class: 'subcategory-title' do
+          = subcategory
+          %small.category-more-caption (more)
         = edit_subcategory_dropdown(subcategory)
       .list-group.link-list.clearfix
         - subcategory.links.each do |link|

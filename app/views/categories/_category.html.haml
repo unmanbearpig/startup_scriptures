@@ -3,8 +3,10 @@
     .category-handle
   .thumbnail.category-box
     .caption
-      = link_to category, class: (category.hidden ? 'hidden-category' : '') do
-        %h3.category-title= category.name
+      %h3.category-title
+        = link_to category, class: (category.hidden ? 'hidden-category' : '') do
+          = category
+          %small.category-more-caption (more)
       %p
         %ul.links-list
           - category.links.order(created_at: :desc).first(5).each do |link|
