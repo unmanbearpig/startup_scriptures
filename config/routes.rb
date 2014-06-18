@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   resources :categories do
     post 'reorder_subcategories'
     resources :subcategories, shallow: true do
+      post 'reorder_links'
       resources :links do
         member do
           post 'upvote'

@@ -1,4 +1,6 @@
-%div.clearfix.link-list-item
+%div.clearfix.link-list-item{'data-link-id' => link.id}
+  - if admin_signed_in?
+    .link-handle
   = render partial: 'links/big_vote_buttons', locals: { link: link }
   .link-description.link-group-item
     %h4.link-title

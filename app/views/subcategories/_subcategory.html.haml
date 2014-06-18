@@ -1,4 +1,4 @@
-.subcategory-list-item{'data-subcategory-id' => subcategory.id, id: "subcategory-#{subcategory.id}"}
+.subcategory-list-item{'data-subcategory-id' => subcategory.id, id: "subcategory-#{subcategory.id}", 'data-reorder-links-path' => subcategory_reorder_links_path(subcategory)}
   .thumbnail.subcategory-box
     - if admin_signed_in?
       .subcategory-handle
@@ -9,7 +9,7 @@
           %small.category-more-caption (more)
         = edit_subcategory_dropdown(subcategory)
       .list-group.link-list.clearfix
-        - subcategory.links.each do |link|
+        - subcategory.ordered_links.each do |link|
           - if defined?(detailed) && detailed
             = render_link link, type: :medium, buttons: true, category: true
           - else

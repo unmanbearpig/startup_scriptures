@@ -2,7 +2,7 @@ class SubcategoriesController < ApplicationController
   layout 'with_categories_header'
 
   before_action :find_category, only: %i(new create)
-  before_action :find_subcategory, only: %i(show destroy edit update)
+  before_action :find_subcategory, only: %i(show reorder_links destroy edit update)
   before_action :make_sure_admin_signed_in, except: %i(show)
 
   def new
@@ -30,6 +30,24 @@ class SubcategoriesController < ApplicationController
     redirect_to :back
   end
 
+  def show
+  end
+
+  def reorder_links
+    links_ids = params[:link_ids]
+
+    respond_to do |format|
+      format.json do
+        links_array = links_ids
+          .reject(&:empty?)
+          .map(&:to_i)
+          .map { |id| Link.find(id) }
+
+        render :json => { success: @subcategory.set_link_order(links_array) }
+      end
+    end
+  end
+
   def edit
   end
 
@@ -47,7 +65,7 @@ class SubcategoriesController < ApplicationController
   private
 
   def find_subcategory
-    @subcategory ||= Subcategory.find(params[:id])
+    @subcategory ||= Subcategory.find(params[:id] || params[:subcategory_id])
   end
 
   def find_category

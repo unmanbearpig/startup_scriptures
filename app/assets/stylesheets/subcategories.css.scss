@@ -9,3 +9,10 @@
 .subcategory-box {
     border-width: 2px !important;
 }
+
+.link-handle {
+   @extend .grab-circle;
+    position: absolute;
+    margin-top: -$grab-circle-radius;
+    right: 18px;
+}
